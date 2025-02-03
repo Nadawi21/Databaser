@@ -1,14 +1,22 @@
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 
-public class Connection {
-    public static void main(String[] args) throws ClassNotFoundException {
+public class DatabaseConnection {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
 
-                try (java.sql.Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/SkoShoppen?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true",
-                        "root",
-                        "k5**t6c!]6^HJv");
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("src/settings.properties"));
+
+                try (java.sql.Connection c = DriverManager.getConnection(
+                       prop.getProperty("connectionString"),
+                        prop.getProperty("name"),
+                     prop.getProperty("password"));
+
                      Statement stmt = c.createStatement();
                      ResultSet rs = stmt.executeQuery("select märke, storlek, pris from Produkt")
                 ) {
