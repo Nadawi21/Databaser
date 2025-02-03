@@ -1,9 +1,9 @@
-public class Produkt {
+public class Product {
     protected String märke;
     protected int storlek;
     protected String färgnamn;
 
-    public Produkt(){}
+    public Product(){}
 
     public String getMärke() {
         return märke;
@@ -27,6 +27,9 @@ public class Produkt {
 
     public void setFärgnamn(String färgnamn) {
         this.färgnamn = färgnamn;
+    }
+
+    public void setPris(int pris) {
     }
 }
 
