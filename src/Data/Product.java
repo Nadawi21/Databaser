@@ -1,3 +1,5 @@
+package Data;
+
 public class Product {
     protected String märke;
     protected int storlek;
