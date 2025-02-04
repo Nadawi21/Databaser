@@ -3,21 +3,23 @@ package Data;
 import java.sql.Timestamp;
 
 public class Product {
-    protected int productOd;
+    protected int productId;
     protected String brand;
     protected int size;
-    protected String price;
+    protected int price;
     protected int stockIdFK;
     protected int colorIdFK;
     protected java.sql.Timestamp created;
     protected java.sql.Timestamp lastUpdate;
 
+    public Product() {}
+
     public int getProductOd() {
-        return productOd;
+        return productId;
     }
 
-    public void setProductOd(int productOd) {
-        this.productOd = productOd;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getBrand() {
@@ -36,11 +38,11 @@ public class Product {
         this.size = size;
     }
 
-    public String getPrice() {
+    public static int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -76,8 +78,8 @@ public class Product {
         this.lastUpdate = lastUpdate;
     }
 
-    public Product(int productOd, String brand, int size, String price, int stockIdFK, int colorIdFK, Timestamp created, Timestamp lastUpdate) {
-        this.productOd = productOd;
+    public Product(int productOd, String brand, int size, int price, int stockIdFK, int colorIdFK, Timestamp created, Timestamp lastUpdate) {
+        this.productId = productOd;
         this.brand = brand;
         this.size = size;
         this.price = price;

@@ -1,5 +1,8 @@
 package Repositories;
 
+import Data.Product;
+
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,42 +10,43 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.sql.*;
+import java.io.FileInputStream;
 
 public class Repository {
 
-    Properties prop = new Properties();
-        prop.load(new FileInputStream("src/Repositories/settings.properties"));
+    List<Product> getProduct() throws IOException {
 
-                try (java.sql.Connection c = DriverManager.getConnection(
+    Properties prop = new Properties();
+        prop.load(new FileInputStream("C:\\TEMP\\Databaser\\src\\Repositories\\properties"));
+
+            try (Connection c = DriverManager.getConnection(
             prop.getProperty("connectionString"),
             prop.getProperty("name"),
             prop.getProperty("password"));
 
     Statement stmt = c.createStatement();
-    ResultSet rs = stmt.executeQuery("select märke, storlek, pris from Produkt")
-                ) {
-        List<Product> Produkt = new ArrayList<>();
+    ResultSet rs = stmt.executeQuery("select brand, size, price from Product")
+    ) {
+        List<Product> Product = new ArrayList<>();
 
         while (rs.next()) {
             Product temp = new Product();
-
-            String märke = rs.getString("märke");
-            temp.setMärke(märke);
-
-            int storlek = rs.getInt("storlek");
-            temp.setStorlek(storlek);
-
-            int pris = rs.getInt("pris");
-            temp.setPris(pris);
-
-            Produkt.add(temp);
+            String brand = rs.getString("brand");
+            temp.setBrand(brand);
+            int size = rs.getInt("size");
+            temp.setSize(size);
+            int price = rs.getInt("price");
+            temp.setPrice(price);
+            Product.add(temp);
         }
 
-        Produkt.forEach(Product -> System.out.println(Product.getMärke()));
+        return Product;
 
 
     } catch (
     SQLException e) {
         throw new RuntimeException(e);
     }
+
 }
