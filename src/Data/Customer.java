@@ -2,7 +2,7 @@ package Data;
 
 public class Customer {
 
-    protected String personnummer;
+    protected String personalnumber;
     protected String name;
     protected String surname;
     protected String email;
@@ -10,8 +10,8 @@ public class Customer {
     protected int OrtIdFK;
 
 
-    public Customer(String personnummer, String name, String surname, String email, String password, int ortIdFK) {
-        this.personnummer = personnummer;
+    public Customer(String personalnumber, String name, String surname, String email, String password, int ortIdFK) {
+        this.personalnumber = personalnumber;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -22,11 +22,11 @@ public class Customer {
 
 
     public String getPersonnummer() {
-        return personnummer;
+        return personalnumber;
     }
 
     public void setPersonnummer(String personnummer) {
-        this.personnummer = personnummer;
+        this.personalnumber = personnummer;
     }
 
     public String getName() {
