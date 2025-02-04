@@ -15,28 +15,28 @@ import java.io.FileInputStream;
 
 public class Repository {
 
-    List<Product> getProduct() throws IOException {
+   public  List<Product> getProduct() throws IOException {
 
     Properties prop = new Properties();
         prop.load(new FileInputStream("C:\\TEMP\\Databaser\\src\\Repositories\\properties"));
 
             try (Connection c = DriverManager.getConnection(
-            prop.getProperty("connectionString"),
+            prop.getProperty("ConnectionString"),
             prop.getProperty("name"),
             prop.getProperty("password"));
 
     Statement stmt = c.createStatement();
-    ResultSet rs = stmt.executeQuery("select brand, size, price from Product")
+    ResultSet rs = stmt.executeQuery("select märke, storlek, pris from Produkt")
     ) {
         List<Product> Product = new ArrayList<>();
 
         while (rs.next()) {
             Product temp = new Product();
-            String brand = rs.getString("brand");
+            String brand = rs.getString("märke");
             temp.setBrand(brand);
-            int size = rs.getInt("size");
+            int size = rs.getInt("storlek");
             temp.setSize(size);
-            int price = rs.getInt("price");
+            int price = rs.getInt("pris");
             temp.setPrice(price);
             Product.add(temp);
         }
