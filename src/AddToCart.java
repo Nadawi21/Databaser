@@ -2,14 +2,16 @@ import java.util.Scanner;
 
 public class AddToCart {
 
-    public
+    //Insert username and password
+    public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 
-    // Fråga användaren om deras namn
-        System.out.print("Insert your username");
-    String name = scanner.nextLine(); // Läs en rad text
 
-    // Fråga användaren om deras ålder
-        System.out.println"Insert your password");
-    int age = scanner.nextInt();
+        System.out.print("Insert your username");
+    String name = scanner.nextLine();
+
+
+        System.out.println("Insert your password");
+    int password = scanner.nextInt();
+    }
 }

@@ -11,6 +11,6 @@ public class RepositoryMain {
 
         Repository rp = new Repository();
         List<Product> prodictList = rp.getProduct();
-        prodictList.forEach(prod -> System.out.println(Product.getPrice()));
+  //      prodictList.forEach(prod -> System.out.println(Product.getPrice()));
     }
 }

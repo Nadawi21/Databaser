@@ -14,7 +14,7 @@ public class Product {
 
     public Product() {}
 
-    public int getProductOd() {
+    public int getProductId() {
         return productId;
     }
 
@@ -38,8 +38,8 @@ public class Product {
         this.size = size;
     }
 
-    public static int getPrice() {
-        return price;
+    public int getPrice() {
+         return price;
     }
 
     public void setPrice(int price) {
@@ -78,8 +78,8 @@ public class Product {
         this.lastUpdate = lastUpdate;
     }
 
-    public Product(int productOd, String brand, int size, int price, int stockIdFK, int colorIdFK, Timestamp created, Timestamp lastUpdate) {
-        this.productId = productOd;
+    public Product(int productId, String brand, int size, int price, int stockIdFK, int colorIdFK, Timestamp created, Timestamp lastUpdate) {
+        this.productId = productId;
         this.brand = brand;
         this.size = size;
         this.price = price;
