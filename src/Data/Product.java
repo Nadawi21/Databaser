@@ -6,7 +6,7 @@ public class Product {
     protected int productId;
     protected String brand;
     protected int size;
-    protected int price;
+    protected static int price;
     protected int stockIdFK;
     protected int colorIdFK;
     protected java.sql.Timestamp created;
@@ -38,7 +38,7 @@ public class Product {
         this.size = size;
     }
 
-    public int getPrice() {
+    public static int getPrice() {
          return price;
     }
 

@@ -9,6 +9,25 @@ public class Customer {
     protected String password;
     protected int OrtIdFK;
 
+    public void userLogin(String personalnumber, String name, String surname) {
+        this.personalnumber = personalnumber;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public boolean checkPNumber(){
+        return !personalnumber.equals("0000000000000");
+    }
+
+    @Override
+    public String toString() {
+        if (checkPNumber()) {
+            return "Welcome, " + name + surname + "!";
+        }else{
+            return "Error, try again";
+        }
+    }
+
     public Customer() {}
     public Customer(String personalnumber, String name, String surname, String email, String password, int ortIdFK) {
         this.personalnumber = personalnumber;
