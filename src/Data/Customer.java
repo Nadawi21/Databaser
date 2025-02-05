@@ -3,9 +3,6 @@ package Data;
 public class Customer {
 
     protected String personalnumber;
-
-
-
     protected String name;
     protected String surname;
     protected String email;
@@ -37,7 +34,7 @@ public class Customer {
         this.surname = surname;
         this.email = email;
         this.password = password;
-        OrtIdFK = ortIdFK;
+        this.OrtIdFK = ortIdFK;
     }
 
 
