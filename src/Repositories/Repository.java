@@ -30,7 +30,6 @@ public class Repository {
              CallableStatement stm = c.prepareCall("CALL userCheck(?,?,?,?,?)");
         ) {
 
-
             stm.setString(1, email);
             stm.setString(2, password);
             stm.registerOutParameter(3, Types.CHAR);
@@ -41,8 +40,6 @@ public class Repository {
             String customerPNr = stm.getString(3);
             String customerName = stm.getString(4);
             String customerLastName = stm.getString(5);
-
-
 
             if (customerPNr.equals("error.personnummer")) {
                 return new Customer("error.personnummer", "error.förnamn", "error.efternamn ",
