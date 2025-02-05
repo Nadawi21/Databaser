@@ -29,7 +29,7 @@ public class Repository {
     Statement stmt = c.createStatement();
     ResultSet rs = stmt.executeQuery("select produktId, märke, storlek, pris from Produkt")
     ) {
-        List<Product> Product = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
 
         while (rs.next()) {
             Product temp = new Product();
@@ -39,12 +39,12 @@ public class Repository {
             temp.setSize(size);
             int price = rs.getInt("pris");
             temp.setPrice(price);
-            Product.add(temp);
+            productList.add(temp);
             int productId = rs.getInt("produktId");
             temp.setBrand(brand);
         }
 
-        return Product;
+        return productList;
 
 
     } catch (
@@ -66,7 +66,7 @@ public class Repository {
              Statement stmt = c.createStatement();
              ResultSet rs = stmt.executeQuery("select personnummer, email, lösenord from kund")) {
 
-            List<Customer> customer = new ArrayList<>();
+            List<Customer> customerList = new ArrayList<>();
 
             while (rs.next()) {
                 Customer temp = new Customer();
@@ -74,13 +74,13 @@ public class Repository {
                 temp.setEmail(email);
                 String password = rs.getString("lösenord");
                 temp.setPassword(password);
-                customer.add(temp);
+                customerList.add(temp);
                 String personalNumber = rs.getString("personnummer");
                 temp.setPassword(personalNumber);
-                customer.add(temp);
+                customerList.add(temp);
             }
 
-            return customer;
+            return customerList;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -99,7 +99,7 @@ public class Repository {
              Statement stmt = c.createStatement();
              ResultSet rs = stmt.executeQuery("select beställningsidFK,  produktidFK, antal from kundorder")) {
 
-            List<OrderItem> OrderItem = new ArrayList<>();
+            List<OrderItem> orderItemList = new ArrayList<>();
 
             while (rs.next()) {
                 OrderItem temp = new OrderItem();
@@ -107,13 +107,13 @@ public class Repository {
                 temp.setOrderIdFK(orderIdFK);
                 int productIdFK = rs.getInt("produktidFK");
                 temp.setProductIdFK (productIdFK);
-                OrderItem.add(temp);
+                orderItemList.add(temp);
                 int amount = rs.getInt("antal");
                 temp.setAmount (amount);
-                OrderItem.add(temp);
+                orderItemList.add(temp);
             }
 
-            return OrderItem;
+            return orderItemList;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -132,7 +132,7 @@ public class Repository {
              Statement stmt = c.createStatement();
              ResultSet rs = stmt.executeQuery("select beställningsid,  personnummerFK, status from beställning")) {
 
-            List<Order> Order = new ArrayList<>();
+            List<Order> orderList = new ArrayList<>();
 
             while (rs.next()) {
                 Order temp = new Order();
@@ -142,15 +142,107 @@ public class Repository {
                 temp.setPersonalNumberFK (PersonalNumberFK);
                 OrderStatus status = OrderStatus.valueOf(rs.getString("status"));
                 temp.setStatus (status);
-                Order.add(temp);
+                orderList.add(temp);
             }
 
-            return Order;
+            return orderList;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+    //Color
+    public List<Color> getColor() throws IOException {
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("C:\\TEMP\\Databaser\\src\\Repositories\\properties"));
+
+        try (Connection c = DriverManager.getConnection(
+                prop.getProperty("ConnectionString"),
+                prop.getProperty("name"),
+                prop.getProperty("password"));
+             Statement stmt = c.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT colorId, colorName FROM Color")) {
+
+            List<Color> colorList = new ArrayList<>(); // Listan heter colorList
+
+            while (rs.next()) {
+                Color temp = new Color();
+                int colorId = rs.getInt("colorId");
+                temp.setColorId(colorId);
+                String colorName = rs.getString("colorName");
+                temp.setColorName(colorName);
+                colorList.add(temp);
+            }
+
+            return colorList; // Returnera colorList
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Category> getCategory() throws IOException {
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("C:\\TEMP\\Databaser\\src\\Repositories\\properties"));
+
+        try (Connection c = DriverManager.getConnection(
+                prop.getProperty("ConnectionString"),
+                prop.getProperty("name"),
+                prop.getProperty("password"));
+             Statement stmt = c.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT kategoriId, typ FROM kategori")) {
+
+            List<Category> categoryList = new ArrayList<>(); // Listan heter categoryList
+
+            while (rs.next()) {
+                Category temp = new Category();
+                int categoryId = rs.getInt("kategoriId");
+                temp.setCategoryId(categoryId);
+                String shoeType = rs.getString("typ");
+                temp.setShoeType(shoeType);
+                categoryList.add(temp);
+            }
+
+            return categoryList; // Returnera categoryList
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //Categorise
+
+    public List<Categorise> getCategorise() throws IOException {
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("C:\\TEMP\\Databaser\\src\\Repositories\\properties"));
+
+        try (Connection c = DriverManager.getConnection(
+                prop.getProperty("ConnectionString"),
+                prop.getProperty("name"),
+                prop.getProperty("password"));
+             Statement stmt = c.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT produktIdFK, kategoriIdFK FROM kategoriserar")) {
+
+            List<Categorise> categoriseList = new ArrayList<>(); // Listan heter categoriseList
+
+            while (rs.next()) {
+                Categorise temp = new Categorise();
+                int productIdFK = rs.getInt("produktIdFK");
+                temp.setProductIdFK(productIdFK);
+                int categoryIdFK = rs.getInt("kategoriIdFK");
+                temp.setCategoryIdFK(categoryIdFK);
+                categoriseList.add(temp);
+            }
+
+            return categoriseList; // Returnera categoriseList
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 
 }

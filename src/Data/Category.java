@@ -8,6 +8,8 @@ public class Category {
     protected java.sql.Timestamp created;
     protected java.sql.Timestamp lastUpdate;
 
+    public Category (){}
+
     public int getCategoryId() {
         return categoryId;
     }
