@@ -9,7 +9,7 @@ public class Customer {
     protected String password;
     protected int OrtIdFK;
 
-
+    public Customer() {}
     public Customer(String personalnumber, String name, String surname, String email, String password, int ortIdFK) {
         this.personalnumber = personalnumber;
         this.name = name;

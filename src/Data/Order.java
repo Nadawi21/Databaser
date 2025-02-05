@@ -5,15 +5,18 @@ import java.util.Date;
 
 public class Order {
     protected int orderId;
-    protected  char personalnumberFK;
+    protected  String personalNumberFK;
     protected Date date;
+    protected OrderStatus status;
     protected java.sql.Timestamp created;
     protected java.sql.Timestamp lastUpdate;
 
-    public Order(int orderId, char personalnumberFK, Date date, Timestamp created, Timestamp lastUpdate) {
+    public Order () {}
+    public Order(int orderId, String personalNumberFK, Date date, OrderStatus status, Timestamp created, Timestamp lastUpdate) {
         this.orderId = orderId;
-        this.personalnumberFK = personalnumberFK;
+        this.personalNumberFK = personalNumberFK;
         this.date = date;
+        this.status = status;
         this.created = created;
         this.lastUpdate = lastUpdate;
     }
@@ -26,12 +29,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public char getPersonalnumberFK() {
-        return personalnumberFK;
+    public String getPersonalNumberFK() {
+        return personalNumberFK;
     }
 
-    public void setPersonalnumberFK(char personalnumberFK) {
-        this.personalnumberFK = personalnumberFK;
+    public void setPersonalNumberFK(String personalNumberFK) {
+        this.personalNumberFK = personalNumberFK;
     }
 
     public Date getDate() {
@@ -40,6 +43,13 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public Timestamp getCreated() {
@@ -58,3 +68,4 @@ public class Order {
         this.lastUpdate = lastUpdate;
     }
 }
+

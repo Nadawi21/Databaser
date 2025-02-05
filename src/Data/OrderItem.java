@@ -9,12 +9,15 @@ public class OrderItem {
     protected java.sql.Timestamp created;
     protected java.sql.Timestamp lastUpdate;
 
+    public OrderItem(){}
     public OrderItem(int productIdFK, int orderIdFK, int amount, Timestamp created, Timestamp lastUpdate) {
         this.productIdFK = productIdFK;
         this.orderIdFK = orderIdFK;
         this.amount = amount;
         this.created = created;
         this.lastUpdate = lastUpdate;
+
+
     }
 
     public int getProductIdFK() {
