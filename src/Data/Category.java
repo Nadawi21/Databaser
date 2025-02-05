@@ -1,12 +1,23 @@
 package Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Category {
     protected int categoryId;
     protected String shoeType;
     protected java.sql.Timestamp created;
     protected java.sql.Timestamp lastUpdate;
+
+    public static Integer getCategoryIdByShoeType(List<Category> categories, String shoeType) {
+        for (Category category : categories) {
+            if (category.getShoeType().equalsIgnoreCase(shoeType)) {
+                return category.getCategoryId();
+            }
+        }
+        return null;
+    }
+
 
     public Category (){}
 

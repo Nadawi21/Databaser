@@ -38,7 +38,7 @@ public class Product {
         this.size = size;
     }
 
-    public static int getPrice() {
+    public int getPrice() {
          return price;
     }
 

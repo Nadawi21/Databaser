@@ -1,7 +1,6 @@
 package Repositories;
 
-import Data.Customer;
-import Data.Product;
+import Data.*;
 
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -13,19 +12,30 @@ import java.util.List;
 import java.util.Properties;
 import java.sql.*;
 import java.io.FileInputStream;
-import java.util.Scanner;
 
 public class Repository {
 
+    private final String connectionString;
+    private final String name;
+    private final String password;
+    public Repository(){
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileInputStream("src/Repositories/properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        connectionString = prop.getProperty("ConnectionString");
+        name = prop.getProperty("name");
+        password = prop.getProperty("password");
+    }
+
     public Customer userCheck(String email, String lösenord) throws IOException, SQLException {
 
-        Properties prop = new Properties();
-        prop.load(new FileInputStream("src/Repositories/settings.properties"));
-
         try (Connection c = DriverManager.getConnection(
-                prop.getProperty("ConnectionString"),
-                prop.getProperty("name"),
-                prop.getProperty("password"));
+                connectionString,
+                name,
+                password);
 
              CallableStatement stm = c.prepareCall("CALL userCheck(?,?,?,?,?)");
         ) {
@@ -52,55 +62,6 @@ public class Repository {
             }
             return new Customer(customerPNr, customerName, customerLastName, email, lösenord, 0);
         }
-    }
-}
-
-
-
-
-
- /*
-    public List<Product> getProduct() throws IOException {
-    //Product
-   public  List<Product> getProduct() throws IOException {
-
-    Properties prop = new Properties();
-        prop.load(new FileInputStream("src/Repositories/settings.properties"));
-
-            try (Connection c = DriverManager.getConnection(
-            prop.getProperty("ConnectionString"),
-            prop.getProperty("name"),
-            prop.getProperty("password"));
-
-
-    Statement stmt = c.createStatement();
-    ResultSet rs = stmt.executeQuery("select produktId, märke, storlek, pris from Produkt")
-    ) {
-        List<Product> productList = new ArrayList<>();
-
-        while (rs.next()) {
-            Product temp = new Product();
-            String brand = rs.getString("märke");
-            temp.setBrand(brand);
-            int size = rs.getInt("storlek");
-            temp.setSize(size);
-            int price = rs.getInt("pris");
-            temp.setPrice(price);
-            productList.add(temp);
-            int productId = rs.getInt("produktId");
-            temp.setBrand(brand);
-        }
-
-        return productList;
-
-
-    } catch (
-    SQLException e) {
-        throw new RuntimeException(e);
-    }
-*/
-
-
     }
 
     //Customer
@@ -175,9 +136,9 @@ public class Repository {
         prop.load(new FileInputStream("C:\\TEMP\\Databaser\\src\\Repositories\\properties"));
 
         try (Connection c = DriverManager.getConnection(
-                prop.getProperty("ConnectionString"),
-                prop.getProperty("name"),
-                prop.getProperty("password"));
+                connectionString,
+                name,
+                password);
              Statement stmt = c.createStatement();
              ResultSet rs = stmt.executeQuery("select beställningsid,  personnummerFK, status from beställning")) {
 
@@ -260,7 +221,7 @@ public class Repository {
         }
     }
 
-    //Categorise
+//Categorise
 
     public List<Categorise> getCategorise() throws IOException {
         Properties prop = new Properties();
@@ -291,8 +252,98 @@ public class Repository {
         }
     }
 
+    //get category
+    public List<Product> getProductBasedOnCategory(Integer chosenCategoryId) throws IOException {
+
+        try (Connection c = DriverManager.getConnection(connectionString, name, password);
+             PreparedStatement stmt = c.prepareStatement("SELECT produktid, märke, storlek, pris FROM produkt " +
+                     "LEFT JOIN kategoriserar ON kategoriserar.produktidfk = produkt.produktid " +
+                     "WHERE kategoriserar.kategoriidfk = ?")){
+             stmt.setInt(1, chosenCategoryId);
+             ResultSet rs = stmt.executeQuery() ;
 
 
 
+                List<Product> productList = new ArrayList<>();
+
+                while (rs.next()) {
+                    Product temp = new Product();
+                    String brand = rs.getString("märke");
+                    temp.setBrand(brand);
+                    int size = rs.getInt("storlek");
+                    temp.setSize(size);
+                    int price = rs.getInt("pris");
+                    temp.setPrice(price);
+                    productList.add(temp);
+                    int productId = rs.getInt("produktId");
+                    temp.setProductId(productId);
+                }
+
+                return productList;
+
+            } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Integer addToCart(String choosenProductId, String choosenNumber, String personnummer) {
+        return null; // ska vara orderId
+    }
 }
+
+
+
+
+
+
+
+
+ /*
+    public List<Product> getProduct() throws IOException {
+    //Product
+   public  List<Product> getProduct() throws IOException {
+
+    Properties prop = new Properties();
+        prop.load(new FileInputStream("src/Repositories/settings.properties"));
+
+            try (Connection c = DriverManager.getConnection(
+            prop.getProperty("ConnectionString"),
+            prop.getProperty("name"),
+            prop.getProperty("password"));
+
+
+    Statement stmt = c.createStatement();
+    ResultSet rs = stmt.executeQuery("select produktId, märke, storlek, pris from Produkt")
+    ) {
+        List<Product> productList = new ArrayList<>();
+
+        while (rs.next()) {
+            Product temp = new Product();
+            String brand = rs.getString("märke");
+            temp.setBrand(brand);
+            int size = rs.getInt("storlek");
+            temp.setSize(size);
+            int price = rs.getInt("pris");
+            temp.setPrice(price);
+            productList.add(temp);
+            int productId = rs.getInt("produktId");
+            temp.setBrand(brand);
+        }
+
+        return productList;
+
+
+    } catch (
+    SQLException e) {
+        throw new RuntimeException(e);
+    }
+*/
+
+
+
+
+
+
+
+
 

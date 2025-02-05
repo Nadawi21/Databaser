@@ -1,10 +1,7 @@
 package TheShoeShop;
-
-
-
+import Data.Category;
 import Data.Customer;
 import Data.Product;
-import Data.Customer;
 import Repositories.Repository;
 
 import java.sql.SQLException;
@@ -28,12 +25,25 @@ public class Main {
         Customer user = repo.userCheck(email, password);
         System.out.println(user);
 
+        System.out.println("Choose a category");
+        List<Category> categoryList = repo.getCategory();
+        categoryList.forEach(st -> System.out.println(st.getShoeType()));
+        String chosenCategory = input.nextLine();
 
 
+        Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
+        List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
+
+        productList.forEach(st -> System.out.println("ProductId:"+st.getProductId()+"\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()+"\n"+"--------------------------"+"\n"));
+        System.out.println("Choose a product via id");
+        String choosenProductId = input.nextLine();
+        System.out.println("write number of product");
+        String choosenNumber = input.nextLine();
+        repo.addToCart(choosenProductId, choosenNumber, user.getPersonnummer());
+        System.out.println("-");
 
 
-        Repository rp = new Repository();
-
+/*
         List<Product> productList = rp.getProduct();
         productList.forEach(p -> System.out.println(p.getPrice()));
         productList.forEach(p -> System.out.println(p.getBrand()));
@@ -43,7 +53,7 @@ public class Main {
         List<Customer> customerList = rp.getCustomer();
         customerList.forEach(pass -> System.out.println(pass.getPassword()));
         customerList.forEach(p -> System.out.println(p.getEmail()));
-
+*/
     }
 }
 
