@@ -34,20 +34,8 @@ public class Main {
 
         System.out.println("Choose a category");
         List<Category> categoryList = repo.getCategory();
-        boolean categoryInput = true;
-        String chosenCategory = "";
-        while (categoryInput){
-            categoryList.forEach(st -> System.out.println(st.getShoeType()));
-            String chosenCategoryTemp = input.nextLine();
-            if (chosenCategoryTemp != null
-                    && !chosenCategoryTemp.isEmpty()
-                    && !categoryList.stream().anyMatch(p-> p.getShoeType().equalsIgnoreCase(chosenCategoryTemp))){
-                System.out.println("wrong category, try again!\n");
-            } else {
-                chosenCategory = chosenCategoryTemp;
-                categoryInput = false;
-            }
-        }
+        categoryList.forEach(st -> System.out.println(st.getShoeType()));
+        String chosenCategory = input.nextLine();
 
         Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
         List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
