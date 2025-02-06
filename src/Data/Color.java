@@ -8,6 +8,7 @@ public class Color {
     protected java.sql.Timestamp created;
     protected java.sql.Timestamp lastUpdate;
 
+    public Color () {}
     public int getColorId() {
         return colorId;
     }
