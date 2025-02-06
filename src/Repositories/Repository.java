@@ -39,13 +39,13 @@ public class Repository {
                 name,
                 password);
 
-             CallableStatement stm = c.prepareCall("CALL userCheck(?,?,?,?,?)");
+             CallableStatement stm = c.prepareCall("call userCheck(?,?,?,?,?)");
         ) {
 
 
             stm.setString(1, email);
             stm.setString(2, lösenord);
-            stm.registerOutParameter(3, Types.CHAR);
+            stm.registerOutParameter(3, Types.VARCHAR);
             stm.registerOutParameter(4, Types.VARCHAR);
             stm.registerOutParameter(5, Types.VARCHAR);
 
@@ -74,7 +74,7 @@ public class Repository {
                 ConnectionString,
                 name,
                 password);
-             CallableStatement stm = c.prepareCall("CALL AddToCart(?,?,?,?,?)")) {
+             CallableStatement stm = c.prepareCall("call AddToCart(?,?,?,?,?)")) {
 
 
             int productId = Integer.parseInt(choosenProductId);
