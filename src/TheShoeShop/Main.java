@@ -1,5 +1,6 @@
 package TheShoeShop;
 import Data.Category;
+import Data.Order;
 import Data.Customer;
 import Data.Product;
 import Repositories.Repository;
@@ -24,6 +25,12 @@ public class Main {
         String password = input.nextLine();
 
         Customer user = repo.userCheck(email, password);
+
+        if (user.getPersonalNumber().equals("0000000000000")) {
+            System.out.println("Invalid email or password. Try again");
+            return;
+        }
+
         System.out.println(user);
 
         System.out.println("Choose a category");
@@ -43,12 +50,13 @@ public class Main {
             }
         }
 
-
         Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
         List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
 
-        productList.forEach(st -> System.out.println("Product number:"+st.getProductId()+"\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()+"\n"+"--------------------------"+"\n"));
-        System.out.println("Choose a product via product number");
+        productList.forEach(st -> System.out.println("ProductId:" + st.getProductId() +
+                "\n" + "Size:" + st.getSize() + "\n" + "Price:" + st.getPrice() + "\n" + "Brand:" + st.getBrand()
+                + "\n" + "--------------------------" + "\n"));
+        System.out.println("Choose a product via number");
         String choosenProductId = input.nextLine();
         System.out.println("Choose a product number");
         String choosenNumber = input.nextLine();

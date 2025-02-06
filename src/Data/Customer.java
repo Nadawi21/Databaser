@@ -9,6 +9,10 @@ public class Customer {
     protected String password;
     protected int OrtIdFK;
 
+    public boolean isValid(String email, String password) {
+        return this.email.equals(email) && this.password.equals(password);
+    }
+
     public void userLogin(String personalnumber, String name, String surname) {
         this.personalNumber = personalnumber;
         this.name = name;
@@ -22,7 +26,7 @@ public class Customer {
     @Override
     public String toString() {
         if (checkPNumber()) {
-            return "Welcome, " + name + surname + "!";
+            return "Welcome, " + name + " " + surname + "!";
         }else{
             return "Error, try again";
         }
