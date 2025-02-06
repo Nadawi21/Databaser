@@ -84,7 +84,7 @@ public class Repository {
 
             stm.setString(1, personnummer);
             stm.setInt(2, productId);
-            stm.setNull(3, Types.INTEGER);
+            stm.setString(3, null);
             stm.setDate(4, orderDate);
             stm.setInt(5, quantity);
 

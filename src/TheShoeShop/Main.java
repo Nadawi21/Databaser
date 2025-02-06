@@ -41,9 +41,6 @@ public class Main {
         String choosenProductId = input.nextLine();
         System.out.println("write number of product");
         String choosenNumber = input.nextLine();
-        repo.addToCart(choosenProductId, choosenNumber, user.getPersonalNumber());
-        System.out.println("-");
-
         try {
             Integer orderId = repo.addToCart(choosenProductId, choosenNumber, user.getPersonalNumber());
             if (orderId != null) {
@@ -54,6 +51,8 @@ public class Main {
         } catch (RuntimeException e) {
             System.out.println("Error adding to cart: " + e.getMessage());
         }
+        System.out.println("-");
+
 /*
         List<Product> productList = rp.getProduct();
         productList.forEach(p -> System.out.println(p.getPrice()));
