@@ -20,7 +20,7 @@ public class Repository {
     private  String password;
 
     //Properties
-    public void properties(){
+    public  Repository (){
         Properties prop = new Properties();
         try {
             prop.load(new FileInputStream("src/Repositories/properties"));
