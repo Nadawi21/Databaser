@@ -26,7 +26,7 @@ public class Main {
 
         Customer user = repo.userCheck(email, password);
 
-        if (user.getPersonalNumber().equals("0000000000000")){
+        if (user.getPersonalNumber().equals("0000000000000")) {
             System.out.println("Invalid email or password. Try again");
             return;
         }
@@ -41,9 +41,9 @@ public class Main {
         Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
         List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
 
-        productList.forEach(st -> System.out.println("ProductId:"+st.getProductId()+
-                "\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()
-                +"\n"+"--------------------------"+"\n"));
+        productList.forEach(st -> System.out.println("ProductId:" + st.getProductId() +
+                "\n" + "Size:" + st.getSize() + "\n" + "Price:" + st.getPrice() + "\n" + "Brand:" + st.getBrand()
+                + "\n" + "--------------------------" + "\n"));
         System.out.println("Choose a product via id");
         String choosenProductId = input.nextLine();
         System.out.println("write number of product");
@@ -60,18 +60,7 @@ public class Main {
         }
         System.out.println("-");
 
-/*
-        List<Product> productList = rp.getProduct();
-        productList.forEach(p -> System.out.println(p.getPrice()));
-        productList.forEach(p -> System.out.println(p.getBrand()));
-        productList.forEach(p -> System.out.println(p.getSize()));
-
-
-
-        List<Customer> customerList = rp.getCustomer();
-        customerList.forEach(pass -> System.out.println(pass.getPassword()));
-        customerList.forEach(p -> System.out.println(p.getEmail()));
-*/
     }
 }
+
 
