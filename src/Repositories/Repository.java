@@ -23,7 +23,7 @@ public class Repository {
     public  Repository (){
         Properties prop = new Properties();
         try {
-            prop.load(new FileInputStream("src/Repositories/properties"));
+            prop.load(new FileInputStream("src/Repositories/settings.properties"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

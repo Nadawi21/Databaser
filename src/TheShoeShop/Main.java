@@ -36,7 +36,9 @@ public class Main {
         Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
         List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
 
-        productList.forEach(st -> System.out.println("ProductId:"+st.getProductId()+"\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()+"\n"+"--------------------------"+"\n"));
+        productList.forEach(st -> System.out.println("ProductId:"+st.getProductId()+
+                "\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()
+                +"\n"+"--------------------------"+"\n"));
         System.out.println("Choose a product via id");
         String choosenProductId = input.nextLine();
         System.out.println("write number of product");
