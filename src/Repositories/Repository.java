@@ -23,7 +23,7 @@ public class Repository {
     public  Repository (){
         Properties prop = new Properties();
         try {
-            prop.load(new FileInputStream("src/Repositories/properties"));
+            prop.load(new FileInputStream("src/Repositories/settings.properties"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,17 +54,19 @@ public class Repository {
             String customerName = stm.getString(4);
             String customerLastName = stm.getString(5);
 
-            if(customerPNr == null) customerPNr = "error.personnummer";
+            if(customerPNr == null) customerPNr = "0000000000000";
             if(customerName == null) customerName = "error.förnamn";
             if(customerLastName == null) customerLastName = "error.efternamn";
 
-            if (customerPNr.equals("error.personnummer")) {
-                return new Customer("error.personnummer", "error.förnamn", "error.efternamn ",
+            if (customerPNr.equals("0000000000000")) {
+                return new Customer("0000000000000", "error.förnamn", "error.efternamn ",
                         "", "", 0);
             }
             return new Customer(customerPNr, customerName, customerLastName, email, lösenord, 0);
         }
+
     }
+
 
 
     //Add to cart

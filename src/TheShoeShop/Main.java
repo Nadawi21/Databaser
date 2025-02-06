@@ -25,13 +25,18 @@ public class Main {
         String password = input.nextLine();
 
         Customer user = repo.userCheck(email, password);
+
+        if (user.getPersonalNumber().equals("0000000000000")){
+            System.out.println("Invalid email or password. Try again");
+            return;
+        }
+
         System.out.println(user);
 
         System.out.println("Choose a category");
         List<Category> categoryList = repo.getCategory();
         categoryList.forEach(st -> System.out.println(st.getShoeType()));
         String chosenCategory = input.nextLine();
-
 
         Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
         List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
