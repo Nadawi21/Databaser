@@ -2,7 +2,7 @@ package Data;
 
 public class Customer {
 
-    protected String personalnumber;
+    protected String personalNumber;
     protected String name;
     protected String surname;
     protected String email;
@@ -10,13 +10,13 @@ public class Customer {
     protected int OrtIdFK;
 
     public void userLogin(String personalnumber, String name, String surname) {
-        this.personalnumber = personalnumber;
+        this.personalNumber = personalnumber;
         this.name = name;
         this.surname = surname;
     }
 
     public boolean checkPNumber(){
-        return !personalnumber.equals("0000000000000");
+        return !personalNumber.equals("0000000000000");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Customer {
 
     public Customer() {}
     public Customer(String personalnumber, String name, String surname, String email, String password, int ortIdFK) {
-        this.personalnumber = personalnumber;
+        this.personalNumber = personalnumber;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -40,12 +40,12 @@ public class Customer {
 
 
 
-    public String getPersonnummer() {
-        return personalnumber;
+    public String getPersonalNumber() {
+        return personalNumber;
     }
 
-    public void setPersonnummer(String personnummer) {
-        this.personalnumber = personnummer;
+    public void setPersonalNumber(String personnummer) {
+        this.personalNumber = personnummer;
     }
 
     public String getName() {

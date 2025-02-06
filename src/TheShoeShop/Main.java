@@ -1,5 +1,6 @@
 package TheShoeShop;
 import Data.Category;
+import Data.Order;
 import Data.Customer;
 import Data.Product;
 import Repositories.Repository;
@@ -15,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
 
         Repository repo = new Repository();
+
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter your email: ");
@@ -39,10 +41,19 @@ public class Main {
         String choosenProductId = input.nextLine();
         System.out.println("write number of product");
         String choosenNumber = input.nextLine();
-        repo.addToCart(choosenProductId, choosenNumber, user.getPersonnummer());
+        repo.addToCart(choosenProductId, choosenNumber, user.getPersonalNumber());
         System.out.println("-");
 
-
+        try {
+            Integer orderId = repo.addToCart(choosenProductId, choosenNumber, user.getPersonalNumber());
+            if (orderId != null) {
+                System.out.println("Products added to cart successfully! Order ID: " + orderId);
+            } else {
+                System.out.println("Failed to add products to cart.");
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Error adding to cart: " + e.getMessage());
+        }
 /*
         List<Product> productList = rp.getProduct();
         productList.forEach(p -> System.out.println(p.getPrice()));
