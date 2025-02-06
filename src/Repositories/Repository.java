@@ -59,7 +59,7 @@ public class Repository {
             if(customerLastName == null) customerLastName = "error.efternamn";
 
             if (customerPNr.equals("error.personnummer")) {
-                return new Customer("error.personnummer", "error.förnamn", "error.efternamn ",
+                return new Customer("error.personnummer", "error.förnamn", "error.efternamn",
                         "", "", 0);
             }
             return new Customer(customerPNr, customerName, customerLastName, email, lösenord, 0);
