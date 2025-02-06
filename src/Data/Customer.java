@@ -26,7 +26,7 @@ public class Customer {
     @Override
     public String toString() {
         if (checkPNumber()) {
-            return "Welcome, " + name + surname + "!";
+            return "Welcome, " + name + " " + surname + "!";
         }else{
             return "Error, try again";
         }
