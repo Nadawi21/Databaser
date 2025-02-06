@@ -1,6 +1,5 @@
 package TheShoeShop;
 import Data.Category;
-import Data.Order;
 import Data.Customer;
 import Data.Product;
 import Repositories.Repository;
