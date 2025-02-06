@@ -1,6 +1,5 @@
 package TheShoeShop;
 import Data.Category;
-import Data.Order;
 import Data.Customer;
 import Data.Product;
 import Repositories.Repository;
@@ -29,17 +28,29 @@ public class Main {
 
         System.out.println("Choose a category");
         List<Category> categoryList = repo.getCategory();
-        categoryList.forEach(st -> System.out.println(st.getShoeType()));
-        String chosenCategory = input.nextLine();
+        boolean categoryInput = true;
+        String chosenCategory = "";
+        while (categoryInput){
+            categoryList.forEach(st -> System.out.println(st.getShoeType()));
+            String chosenCategoryTemp = input.nextLine();
+            if (chosenCategoryTemp != null
+                    && !chosenCategoryTemp.isEmpty()
+                    && !categoryList.stream().anyMatch(p-> p.getShoeType().equalsIgnoreCase(chosenCategoryTemp))){
+                System.out.println("wrong category, try again!\n");
+            } else {
+                chosenCategory = chosenCategoryTemp;
+                categoryInput = false;
+            }
+        }
 
 
         Integer chosenCategoryId = Category.getCategoryIdByShoeType(categoryList, chosenCategory);
         List<Product> productList = repo.getProductBasedOnCategory(chosenCategoryId);
 
-        productList.forEach(st -> System.out.println("ProductId:"+st.getProductId()+"\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()+"\n"+"--------------------------"+"\n"));
-        System.out.println("Choose a product via id");
+        productList.forEach(st -> System.out.println("Product number:"+st.getProductId()+"\n"+"Size:"+st.getSize()+"\n"+"Price:"+st.getPrice()+"\n"+"Brand:"+st.getBrand()+"\n"+"--------------------------"+"\n"));
+        System.out.println("Choose a product via product number");
         String choosenProductId = input.nextLine();
-        System.out.println("write number of product");
+        System.out.println("Choose a product number");
         String choosenNumber = input.nextLine();
         try {
             Integer orderId = repo.addToCart(choosenProductId, choosenNumber, user.getPersonalNumber());
@@ -53,18 +64,6 @@ public class Main {
         }
         System.out.println("-");
 
-/*
-        List<Product> productList = rp.getProduct();
-        productList.forEach(p -> System.out.println(p.getPrice()));
-        productList.forEach(p -> System.out.println(p.getBrand()));
-        productList.forEach(p -> System.out.println(p.getSize()));
-
-
-
-        List<Customer> customerList = rp.getCustomer();
-        customerList.forEach(pass -> System.out.println(pass.getPassword()));
-        customerList.forEach(p -> System.out.println(p.getEmail()));
-*/
     }
 }
 
