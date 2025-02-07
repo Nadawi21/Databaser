@@ -1,6 +1,6 @@
-package Repositories;
+package repositories;
 
-import Data.*;
+import data.*;
 
 import java.io.IOException;
 import java.sql.DriverManager;

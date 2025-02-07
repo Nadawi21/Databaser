@@ -1,8 +1,8 @@
-package TheShoeShop;
-import Data.Category;
-import Data.Customer;
-import Data.Product;
-import Repositories.Repository;
+package theShoeShop;
+import data.Category;
+import data.Customer;
+import data.Product;
+import repositories.Repository;
 
 import java.sql.SQLException;
 import java.util.List;
